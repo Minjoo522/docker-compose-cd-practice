@@ -36,7 +36,7 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/be-app:${{ github.sha }}
-          platforms: linux/arm64
+          platforms: linux/amd64
   # ref : https://docs.docker.com/build/ci/github-actions/multi-platform/
   # github.sha : GitHub Actions에서 제공하는 내장 환경 변수 중 하나로, 현재 워크플로우가 실행되는 커밋의 고유 해시 값(SHA-1)
 
