@@ -36,7 +36,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/be-app:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/be-app:$latest
           platforms: linux/amd64
   # ref : https://docs.docker.com/build/ci/github-actions/multi-platform/
   # github.sha : GitHub Actions에서 제공하는 내장 환경 변수 중 하나로, 현재 워크플로우가 실행되는 커밋의 고유 해시 값(SHA-1)
@@ -48,7 +48,7 @@ jobs:
 
     # compose.yml에 전달되는 환경변수
     env:
-      BACKEND_APP_IMAGE_NAME: be-app
+      BACKEND_APP_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/be-app
       BACKEND_TEST: testtesttest
 
     steps:
@@ -60,7 +60,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Pull Docker Image
-        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/be-app:${{ github.sha }}
+        run: docker pull ${{ env.BACKEND_APP_IMAGE_NAME }}
 
       - name: Docker Compose up
         run: docker compose up -d
