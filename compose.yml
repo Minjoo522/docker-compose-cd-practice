@@ -6,12 +6,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /etc/nginx/sites-available/betest:/etc/nginx/sites-available/default
+      - ./etc/nginx/sites-available/betest:/etc/nginx/sites-available/default
 
   application:
-    depends_on:
-      - nginx
-    container_name: backend-test
     image: ${BACKEND_APP_IMAGE_NAME}
     networks:
       - nginx-application
@@ -20,6 +17,7 @@ services:
     environment:
       BACKEND_TEST: ${BACKEND_TEST}
     restart: always
+    container_name: backend-test
 
 networks:
   nginx-application:
