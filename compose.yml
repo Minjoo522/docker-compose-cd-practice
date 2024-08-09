@@ -9,6 +9,8 @@ services:
       - /etc/nginx/sites-available/betest:/etc/nginx/sites-available/default
 
   application:
+    depends_on:
+      - nginx
     container_name: backend-test
     image: ${BACKEND_APP_IMAGE_NAME}
     networks:
